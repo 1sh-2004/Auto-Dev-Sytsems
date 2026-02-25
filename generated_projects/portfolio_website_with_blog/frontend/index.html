@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website with Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Green */
+            --secondary-color: #f44336; /* Red */
+            --accent-color: #2196F3; /* Blue */
+            --text-color: #333;
+            --light-text-color: #666;
+            --background-color: #f8f8f8;
+            --dark-background-color: #333;
+            --card-background-color: #fff;
+            --border-color: #eee;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-medium: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        header {
+            background-color: var(--dark-background-color);
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-medium);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: var(--card-background-color);
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            background-color: #43a047;
+            transform: translateY(-2px);
+        }
+
+        .button.secondary {
+            background-color: var(--accent-color);
+        }
+
+        .button.secondary:hover {
+            background-color: #1976d2;
+        }
+
+        /* Hero Section */
+        #home_page {
+            text-align: center;
+            background-color: #e0f7fa; /* Light Blue background for hero */
+            padding: 6rem 2rem;
+            box-shadow: none; /* No shadow for hero */
+            border-radius: 0; /* No border-radius for hero */
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        #home_page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(33, 150, 243, 0.1) 100%);
+            z-index: 0;
+            border-radius: 8px;
+        }
+
+        #home_page > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        #home_page h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-background-color);
+        }
+
+        #home_page h2::after {
+            background-color: var(--primary-color);
+        }
+
+        #home_page .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 2rem;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background-color: var(--card-background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+        }
+
+        .card .tags span {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #555;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .card .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* About Page */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background-color: #1976d2;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 1.5rem;
+            background-color: var(--card-background-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: left;
+        }
+
+        .timeline-content h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+        }
+
+        .timeline-date {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: var(--shadow-medium);
+            z-index: 1;
+        }
+
+        /* Portfolio Detail Page */
+        #portfolio_project_detail_page img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .project-links a {
+            margin-right: 15px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Blog Post Detail Page */
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .post-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-tags span {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #555;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group textarea,
+        .form-group select {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Admin Pages Specific Styling */
+        .admin-page-note {
+            background-color: #ffee58; /* Light yellow */
+            color: #555;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .admin-dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-stat-card {
+            background-color: #e3f2fd; /* Light blue */
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+        }
+
+        .admin-stat-card h4 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .admin-stat-card p {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            color: var(--dark-background-color);
+            font-weight: 700;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background-color: var(--dark-background-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .admin-table tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+
+        .admin-table .action-links a {
+            margin-right: 10px;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .admin-table .action-links a:hover {
+            text-decoration: underline;
+        }
+
+        .admin-table .action-links a.delete {
+            color: var(--secondary-color);
+        }
+
+        .admin-post-editor-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-post-editor-options div {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-background-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        footer p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        footer .social-media-footer {
+            margin-top: 1rem;
+        }
+
+        footer .social-media-footer a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+
+        footer .social-media-footer a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px 10px 10px;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            #home_page h2 {
+                font-size: 2.5rem;
+            }
+
+            #home_page .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+            }
+
+            .timeline-content {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+                text-align: left;
+            }
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin-left: 40px; /* Adjust for consistent left alignment */
+                text-align: left;
+            }
+
+            .timeline-date {
+                left: 20px;
+                top: 0;
+                transform: translateX(-50%);
+            }
+
+            .admin-dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-post-editor-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1><a href="#home_page">My Portfolio</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#home_page">Home</a></li>
+                    <li><a href="#about_page">About</a></li>
+                    <li><a href="#portfolio_page">Portfolio</a></li>
+                    <li><a href="#blog_page">Blog</a></li>
+                    <li><a href="#contact_page">Contact</a></li>
+                    <li><a href="#admin_login_page">Admin Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Page -->
+        <section id="home_page">
+            <h2>Hello, I'm [Your Name]</h2>
+            <p class="hero-subtitle">A passionate Frontend Engineer building engaging web experiences.</p>
+            <p>
+                Welcome to my digital space where I showcase my work and share my thoughts on web development.
+            </p>
+            <div style="margin-top: 2rem;">
+                <a href="#portfolio_page" class="button">View My Work</a>
+                <a href="#contact_page" class="button secondary" style="margin-left: 15px;">Get In Touch</a>
+            </div>
+
+            <h3 style="margin-top: 4rem; text-align: center;">Featured Projects</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>E-commerce Dashboard UI</h4>
+                    <p>A responsive dashboard for managing online store sales, inventory, and customer data.</p>
+                    <div class="tags"><span>React</span><span>Redux</span><span>SCSS</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">Learn More &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Real-time Chat Application</h4>
+                    <p>Web-based chat with live messaging, user authentication, and group chat features.</p>
+                    <div class="tags"><span>Vue.js</span><span>WebSockets</span><span>Node.js</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">Learn More &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Personal Blog Platform</h4>
+                    <p>A custom CMS for managing articles, categories, and user comments with rich text editing.</p>
+                    <div class="tags"><span>Next.js</span><span>Strapi CMS</span><span>GraphQL</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">Learn More &rarr;</a>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 4rem; text-align: center;">Latest Blog Posts</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Optimizing Frontend Performance: A Comprehensive Guide</h4>
+                    <p>Deep dive into techniques and tools to make your web applications blazing fast.</p>
+                    <div class="tags"><span>Performance</span><span>Web Vitals</span><span>Optimization</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read Post &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>State Management in Modern React Applications</h4>
+                    <p>Exploring various patterns and libraries for effective state management in React.</p>
+                    <div class="tags"><span>React</span><span>State Management</span><span>Redux</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read Post &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Accessibility Best Practices for Inclusive Web Design</h4>
+                    <p>Ensuring your websites are usable and accessible to everyone, regardless of ability.</p>
+                    <div class="tags"><span>Accessibility</span><span>UX</span><span>Web Standards</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read Post &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about_page">
+            <h2>About Me</h2>
+            <div style="text-align: center;">
+                <p>
+                    I am a senior frontend engineer with 8+ years of experience in crafting beautiful,
+                    responsive, and high-performance web applications. My passion lies in creating intuitive
+                    user interfaces and seamless user experiences using modern web technologies.
+                </p>
+                <p>
+                    Throughout my career, I've had the opportunity to work on diverse projects, from large-scale
+                    e-commerce platforms to real-time data visualization dashboards. I thrive in collaborative
+                    environments and am always eager to learn and adapt to new challenges and technologies.
+                </p>
+                <p>
+                    When I'm not coding, you can find me exploring new hiking trails, experimenting with
+                    photography, or diving into a good book. I believe in continuous learning and leveraging
+                    my skills to build meaningful and impactful digital products.
+                </p>
+                <a href="#" class="button secondary" style="margin-top: 1rem;">Download My CV</a>
+            </div>
+
+            <h3>My Skills</h3>
+            <div class="skills-list">
+                <span class="skill-item">HTML5</span>
+                <span class="skill-item">CSS3 (Sass, Less)</span>
+                <span class="skill-item">JavaScript (ES6+)</span>
+                <span class="skill-item">React.js</span>
+                <span class="skill-item">Vue.js</span>
+                <span class="skill-item">Next.js</span>
+                <span class="skill-item">Node.js (Basic)</span>
+                <span class="skill-item">TypeScript</span>
+                <span class="skill-item">Responsive Design</span>
+                <span class="skill-item">Web Performance</span>
+                <span class="skill-item">Accessibility (A11y)</span>
+                <span class="skill-item">Git/GitHub</span>
+                <span class="skill-item">RESTful APIs</span>
+                <span class="skill-item">GraphQL</span>
+                <span class="skill-item">UI/UX Principles</span>
+            </div>
+
+            <h3>Experience & Education</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Senior Frontend Engineer - TechCorp Innovations</h4>
+                        <p><strong>2020 - Present</strong></p>
+                        <ul>
+                            <li>Led frontend development for a flagship SaaS product, increasing user engagement by 25%.</li>
+                            <li>Mentored junior developers and established best practices for scalable component architecture.</li>
+                            <li>Integrated various third-party APIs and services for enhanced functionality.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">2020</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Frontend Developer - WebSolutions Agency</h4>
+                        <p><strong>2016 - 2020</strong></p>
+                        <ul>
+                            <li>Developed and maintained responsive websites and web applications for various clients.</li>
+                            <li>Collaborated with design and backend teams to deliver pixel-perfect user interfaces.</li>
+                            <li>Implemented A/B testing and analytics to optimize user flows.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">2016</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>B.Sc. Computer Science - University of Technology</h4>
+                        <p><strong>2012 - 2016</strong></p>
+                        <ul>
+                            <li>Graduated with honors, specializing in Human-Computer Interaction.</li>
+                            <li>Completed capstone project: "Interactive Data Visualization for Public Health".</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-date">2012</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Page -->
+        <section id="portfolio_page">
+            <h2>My Portfolio</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p>Discover a selection of my latest projects, showcasing my skills in web development.</p>
+                <div class="project-filters" style="margin-top: 1.5rem;">
+                    <a href="#" class="button secondary" style="padding: 8px 15px; margin: 5px;">All</a>
+                    <a href="#" class="button secondary" style="padding: 8px 15px; margin: 5px;">Web Apps</a>
+                    <a href="#" class="button secondary" style="padding: 8px 15px; margin: 5px;">UI/UX</a>
+                    <a href="#" class="button secondary" style="padding: 8px 15px; margin: 5px;">E-commerce</a>
+                    <a href="#" class="button secondary" style="padding: 8px 15px; margin: 5px;">Blog Platforms</a>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>SaaS Marketing Landing Page</h4>
+                    <p>Designed and developed a high-converting landing page for a new SaaS product.</p>
+                    <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Animation</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Fitness Tracker App</h4>
+                    <p>A mobile-first web application for tracking workouts, progress, and setting goals.</p>
+                    <div class="tags"><span>React Native Web</span><span>GraphQL</span><span>PWA</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Recipe Sharing Platform</h4>
+                    <p>Community-driven platform for sharing recipes, with user profiles and search functionality.</p>
+                    <div class="tags"><span>Vue.js</span><span>Firebase</span><span>Material Design</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Travel Booking Interface</h4>
+                    <p>Intuitive UI for searching, comparing, and booking flights and hotels.</p>
+                    <div class="tags"><span>Angular</span><span>RxJS</span><span>Typescript</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Online Learning Platform</h4>
+                    <p>Interactive platform for online courses, quizzes, and progress tracking.</p>
+                    <div class="tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card">
+                    <h4>Weather Forecast Dashboard</h4>
+                    <p>Real-time weather data visualization with interactive maps and hourly forecasts.</p>
+                    <div class="tags"><span>Vanilla JS</span><span>API Integration</span><span>D3.js</span></div>
+                    <a href="#portfolio_project_detail_page" class="read-more">View Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Project Detail Page (Example) -->
+        <section id="portfolio_project_detail_page">
+            <h2>E-commerce Dashboard UI</h2>
+            <p class="post-meta"><strong>Category:</strong> Web Apps, UI/UX | <strong>Date:</strong> October 2023</p>
+            <img src="https://via.placeholder.com/800x450/e0f2f7/4CAF50?text=Project+Image+1" alt="E-commerce Dashboard Screenshot" style="width: 100%; max-width: 800px; display: block; margin: 0 auto 1.5rem;">
+            <p>
+                This project involved designing and developing a comprehensive e-commerce dashboard user interface.
+                The goal was to provide an intuitive and efficient platform for store administrators to manage
+                various aspects of their online business, including sales, inventory, orders, and customer data.
+            </p>
+            <p>
+                Key features include real-time sales analytics, product management with image uploads,
+                order processing workflows, and customer relationship management tools. The design focused
+                on data visualization clarity and ease of navigation to streamline administrative tasks.
+            </p>
+            <h3>Technologies Used</h3>
+            <div class="tags" style="text-align: left; margin-bottom: 2rem;">
+                <span>React</span>
+                <span>Redux</span>
+                <span>SCSS</span>
+                <span>Chart.js</span>
+                <span>Material-UI</span>
+                <span>Axios</span>
+            </div>
+            <h3>Image Gallery / Video</h3>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem;">
+                <img src="https://via.placeholder.com/350x200/e0f2f7/4CAF50?text=Dashboard+View" alt="Dashboard View" style="width: calc(50% - 0.5rem); min-width: 250px; flex-grow: 1;">
+                <img src="https://via.placeholder.com/350x200/e0f2f7/4CAF50?text=Analytics+View" alt="Analytics View" style="width: calc(50% - 0.5rem); min-width: 250px; flex-grow: 1;">
+                <!-- Placeholder for video embed -->
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe> -->
+            </div>
+            <h3>Links</h3>
+            <div class="project-links">
+                <a href="#" target="_blank">Live Demo &rarr;</a>
+                <a href="#" target="_blank">GitHub Repository &rarr;</a>
+            </div>
+        </section>
+
+        <!-- Blog Page -->
+        <section id="blog_page">
+            <h2>Blog</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p>My thoughts, insights, and tutorials on web development, technology, and beyond.</p>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search blog posts..." style="padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; width: 250px;">
+                    </div>
+                    <div class="categories-filter">
+                        <select style="padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--background-color);">
+                            <option value="">All Categories</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                            <option value="ux">UI/UX</option>
+                            <option value="performance">Performance</option>
+                        </select>
+                    </div>
+                    <div class="tags-filter">
+                        <input type="text" placeholder="Filter by tags (e.g., React)" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; width: 200px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4>The Evolution of CSS: From Floats to Flexbox and Grid</h4>
+                    <p>A historical overview of CSS layout techniques and their impact on modern web design.</p>
+                    <div class="tags"><span>CSS</span><span>Layout</span><span>History</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read More &rarr;</a>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.8rem; margin-bottom: 0;">Jan 15, 2024</p>
+                </div>
+                <div class="card">
+                    <h4>Understanding Asynchronous JavaScript: Callbacks, Promises, Async/Await</h4>
+                    <p>Demystifying async patterns in JavaScript for better and more efficient code.</p>
+                    <div class="tags"><span>JavaScript</span><span>Async</span><span>Promises</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read More &rarr;</a>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.8rem; margin-bottom: 0;">Dec 28, 2023</p>
+                </div>
+                <div class="card">
+                    <h4>Building Scalable APIs with Node.js and Express</h4>
+                    <p>Best practices for designing and implementing robust backend APIs with Node.js.</p>
+                    <div class="tags"><span>Node.js</span><span>Express</span><span>API</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read More &rarr;</a>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.8rem; margin-bottom: 0;">Dec 10, 2023</p>
+                </div>
+                <div class="card">
+                    <h4>The Power of Web Components: Reusable UI Elements</h4>
+                    <p>How to build truly reusable and framework-agnostic UI components using Web Components.</p>
+                    <div class="tags"><span>Web Components</span><span>Custom Elements</span><span>Shadow DOM</span></div>
+                    <a href="#blog_post_detail_page" class="read-more">Read More &rarr;</a>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.8rem; margin-bottom: 0;">Nov 20, 2023</p>
+                </div>
+            </div>
+
+            <div class="pagination" style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">&laquo; Previous</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">1</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">2</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">3</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">Next &raquo;</a>
+            </div>
+        </section>
+
+        <!-- Blog Post Detail Page (Example) -->
+        <section id="blog_post_detail_page">
+            <h2 style="text-align: center;">Optimizing Frontend Performance: A Comprehensive Guide</h2>
+            <p class="post-meta">By [Your Name] on January 15, 2024 | Category: Frontend, Performance</p>
+            <div class="post-content">
+                <p>
+                    In today's fast-paced digital world, users expect websites and web applications to load
+                    instantly and respond smoothly. Frontend performance optimization is no longer a luxury
+                    but a necessity for a successful online presence. A slow website can lead to higher bounce rates,
+                    lower conversion rates, and a degraded user experience.
+                </p>
+                <img src="https://via.placeholder.com/800x400/fff3e0/f44336?text=Performance+Optimization+Image" alt="Performance Optimization" style="width: 100%; max-width: 800px; display: block; margin: 0 auto 1.5rem;">
+                <h3>Why Performance Matters</h3>
+                <p>
+                    User expectations are at an all-time high. Studies show that a delay of even a few
+                    hundred milliseconds can significantly impact user satisfaction and business metrics.
+                    Search engines also favor faster websites, giving them better rankings. Optimizing
+                    performance improves accessibility, reduces server load, and conserves resources,
+                    making your application more sustainable.
+                </p>
+                <h3>Key Optimization Areas</h3>
+                <ul>
+                    <li><strong>Image and Asset Optimization:</strong> Compressing images, using modern formats (WebP),
+                        and lazy loading can dramatically reduce page weight.</li>
+                    <li><strong>Critical CSS and Code Splitting:</strong> Delivering only the CSS and JavaScript
+                        required for the initial page load can speed up rendering.</li>
+                    <li><strong>Caching Strategies:</strong> Leveraging browser and CDN caching to reduce repetitive downloads.</li>
+                    <li><strong>Minimize Render-Blocking Resources:</strong> Moving scripts to the end of the body
+                        or using `defer`/`async` attributes.</li>
+                    <li><strong>Reduce Server Response Time:</strong> Optimizing backend APIs and database queries.</li>
+                </ul>
+                <p>
+                    Implementing these strategies requires a holistic approach, encompassing both development
+                    practices and deployment configurations. Regular monitoring and testing are crucial
+                    to maintain high performance over time.
+                </p>
+            </div>
+            <div class="post-tags" style="text-align: center;">
+                <span>#Frontend</span>
+                <span>#Performance</span>
+                <span>#Optimization</span>
+                <span>#WebDev</span>
+            </div>
+            <div class="share-buttons" style="text-align: center; margin-top: 2rem;">
+                <p>Share this post:</p>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">Twitter</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">LinkedIn</a>
+                <a href="#" class="button secondary" style="padding: 8px 15px; margin: 0 5px;">Facebook</a>
+            </div>
+
+            <div class="comments-section" style="margin-top: 3rem;">
+                <h3>Comments (3)</h3>
+                <div style="background-color: var(--background-color); padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                    <p><strong>Alice Doe</strong> <span style="font-size: 0.8rem; color: #777;">on Jan 16, 2024</span></p>
+                    <p>Great post! The tips on image optimization made a huge difference for my latest project.</p>
+                </div>
+                <div style="background-color: var(--background-color); padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                    <p><strong>Bob Smith</strong> <span style="font-size: 0.8rem; color: #777;">on Jan 17, 2024</span></p>
+                    <p>I agree, performance is key. Have you considered a follow-up post on Core Web Vitals?</p>
+                </div>
+
+                <h3>Leave a Comment</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="comment-name">Name:</label>
+                        <input type="text" id="comment-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-email">Email:</label>
+                        <input type="email" id="comment-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-body">Comment:</label>
+                        <textarea id="comment-body" name="comment" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="button">Submit Comment</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact_page">
+            <h2>Contact Me</h2>
+            <p style="text-align: center;">Have a project in mind, a question, or just want to say hello? Fill out the form below or reach out via social media.</p>
+
+            <form action="#" method="post" style="max-width: 600px; margin: 3rem auto;">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button">Send Message</button>
+                </div>
+            </form>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3>Other Ways to Connect</h3>
+                <p>Email: <a href="mailto:your.email@example.com" style="color: var(--accent-color); text-decoration: none;">your.email@example.com</a></p>
+                <div class="social-links" style="margin-top: 1rem;">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">Twitter</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI/Application Features Section -->
+        <section id="ai_features_section">
+            <h2>Application Features & Integrations</h2>
+            <p style="text-align: center;">This platform is designed with several advanced features and potential AI integrations to enhance usability and content management.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Responsive Design</h4>
+                    <p>Ensures optimal viewing and interaction across a wide range of devices (desktops, tablets, mobile phones).</p>
+                </div>
+                <div class="card">
+                    <h4>SEO Optimization</h4>
+                    <p>Built with semantic HTML, proper meta tags, and accessibility best practices to improve search engine visibility.</p>
+                </div>
+                <div class="card">
+                    <h4>Content Management System (CMS) for Blog</h4>
+                    <p>Backend system for easily creating, editing, and publishing blog posts and managing categories/tags.</p>
+                </div>
+                <div class="card">
+                    <h4>Contact Form</h4>
+                    <p>Integrated form for visitors to directly send messages, with backend processing capabilities.</p>
+                </div>
+                <div class="card">
+                    <h4>Image and Asset Optimization</h4>
+                    <p>Automated processes to compress and serve images and other assets efficiently for faster load times.</p>
+                </div>
+                <div class="card">
+                    <h4>Social Media Integration</h4>
+                    <p>Easy sharing of blog posts and content across various social media platforms.</p>
+                </div>
+                <div class="card">
+                    <h4>Authentication System</h4>
+                    <p>Secure login system for administrators to access protected content and management tools.</p>
+                </div>
+                <div class="card">
+                    <h4>Comments Section</h4>
+                    <p>Allows users to engage with blog posts by leaving comments, enhancing community interaction.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Login Page -->
+        <section id="admin_login_page">
+            <h2>Admin Login</h2>
+            <p class="admin-page-note">This is an admin-protected section. Actual login requires a backend authentication system.</p>
+            <form action="#" method="post" style="max-width: 400px; margin: 3rem auto;">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button">Log In</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="admin_dashboard">
+            <h2>Admin Dashboard</h2>
+            <p class="admin-page-note">Login Required: This page would typically be accessible only after successful authentication.</p>
+            <div style="text-align: center;">
+                <p style="font-size: 1.1rem; color: var(--text-color);">Welcome, Administrator!</p>
+            </div>
+
+            <h3>Quick Stats</h3>
+            <div class="admin-dashboard-stats">
+                <div class="admin-stat-card">
+                    <h4>Total Posts</h4>
+                    <p>57</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Published</h4>
+                    <p>48</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Drafts</h4>
+                    <p>9</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Total Comments</h4>
+                    <p>123</p>
+                </div>
+            </div>
+
+            <h3>Recent Activity</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="background-color: var(--background-color); padding: 1rem; border-radius: 5px; margin-bottom: 10px;">New post "AI in Web Development" published. (Jan 20, 2024)</li>
+                <li style="background-color: var(--background-color); padding: 1rem; border-radius: 5px; margin-bottom: 10px;">Comment on "Frontend Performance" by Alice D. (Jan 19, 2024)</li>
+                <li style="background-color: var(--background-color); padding: 1rem; border-radius: 5px; margin-bottom: 10px;">Post "Getting Started with Vue 3" updated. (Jan 18, 2024)</li>
+            </ul>
+
+            <h3 style="margin-top: 3rem;">Admin Navigation</h3>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                <a href="#admin_post_management_page" class="button">Manage Posts</a>
+                <a href="#" class="button secondary">Manage Categories</a>
+                <a href="#" class="button secondary">Manage Users</a>
+                <a href="#" class="button secondary">Settings</a>
+            </div>
+        </section>
+
+        <!-- Admin Post Management Page -->
+        <section id="admin_post_management_page">
+            <h2>Manage Blog Posts</h2>
+            <p class="admin-page-note">Login Required: CRUD interface for managing blog posts.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <input type="text" placeholder="Search posts..." style="width: 300px; padding: 10px; border: 1px solid var(--border-color); border-radius: 5px;">
+                <a href="#admin_post_editor_page" class="button">Create New Post</a>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>AI in Web Development</td>
+                        <td>AI</td>
+                        <td>Published</td>
+                        <td>Jan 20, 2024</td>
+                        <td class="action-links">
+                            <a href="#admin_post_editor_page">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Frontend Performance Guide</td>
+                        <td>Frontend</td>
+                        <td>Published</td>
+                        <td>Jan 15, 2024</td>
+                        <td class="action-links">
+                            <a href="#admin_post_editor_page">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>103</td>
+                        <td>Understanding Async JS</td>
+                        <td>JavaScript</td>
+                        <td>Published</td>
+                        <td>Dec 28, 2023</td>
+                        <td class="action-links">
+                            <a href="#admin_post_editor_page">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>104</td>
+                        <td>Next-Gen CSS Features</td>
+                        <td>CSS</td>
+                        <td>Draft</td>
+                        <td>Dec 05, 2023</td>
+                        <td class="action-links">
+                            <a href="#admin_post_editor_page">Edit</a>
+                            <a href="#" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Admin Post Editor Page -->
+        <section id="admin_post_editor_page">
+            <h2>Create / Edit Blog Post</h2>
+            <p class="admin-page-note">Login Required: Page to create or edit a blog post.</p>
+            <form action="#" method="post" style="max-width: 800px; margin: 3rem auto;">
+                <div class="form-group">
+                    <label for="post-title">Post Title:</label>
+                    <input type="text" id="post-title" name="title" value="New Post Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-slug">Slug:</label>
+                    <input type="text" id="post-slug" name="slug" value="new-post-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-content">Post Content:</label>
+                    <textarea id="post-content" name="content" style="min-height: 300px;">This is the content of the blog post. Use a rich text editor here in a real application.</textarea>
+                </div>
+                <div class="admin-post-editor-options">
+                    <div class="form-group">
+                        <label for="post-category">Category:</label>
+                        <select id="post-category" name="category">
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                            <option value="ai">AI</option>
+                            <option value="ux">UI/UX</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-tags">Tags (comma-separated):</label>
+                        <input type="text" id="post-tags" name="tags" value="tag1, tag2, tag3">
+                    </div>
+                    <div class="form-group">
+                        <label for="publish-date">Publish Date:</label>
+                        <input type="date" id="publish-date" name="publish_date" value="2024-01-20">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button">Save Draft</button>
+                    <button type="submit" class="button secondary" style="margin-left: 15px;">Publish Post</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+            <div class="social-media-footer">
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

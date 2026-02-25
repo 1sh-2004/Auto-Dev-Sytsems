@@ -1,0 +1,25 @@
+{
+    "intent": "portfolio_website",
+    "answers": {
+      "target_audience": "recruiters",
+      "needs_blog": true,
+      "wants_ai": true
+    },
+    "suggested_features": [
+      {
+        "id": "blog",
+        "why": "Improves SEO and shows expertise",
+        "status": "accepted"
+      },
+      {
+        "id": "ai_project_recommender",
+        "why": "Differentiates your portfolio",
+        "status": "pending"
+      }
+    ],
+    "open_questions": [
+      "Do you want admin login for the blog?"
+    ],
+    "confirmed": false
+  }
+  

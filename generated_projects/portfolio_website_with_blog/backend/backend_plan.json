@@ -1,0 +1,98 @@
+{
+  "project": {
+    "name": "Portfolio Website with Blog",
+    "type": "website"
+  },
+  "stack": {
+    "framework": "fastapi",
+    "language": "python"
+  },
+  "ai": {
+    "enabled": true,
+    "paradigm": "ml"
+  },
+  "routes": [
+    {
+      "path": "/",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Home Page"
+    },
+    {
+      "path": "/about",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "About Page"
+    },
+    {
+      "path": "/portfolio",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Portfolio Page"
+    },
+    {
+      "path": "/portfolio/[slug]",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Portfolio Project Detail Page"
+    },
+    {
+      "path": "/blog",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Blog Page"
+    },
+    {
+      "path": "/blog/[slug]",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Blog Post Detail Page"
+    },
+    {
+      "path": "/contact",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Contact Page"
+    },
+    {
+      "path": "/admin/login",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Admin Login Page"
+    },
+    {
+      "path": "/admin/dashboard",
+      "method": "GET",
+      "auth_required": true,
+      "purpose": "Admin Dashboard"
+    },
+    {
+      "path": "/admin/posts",
+      "method": "GET",
+      "auth_required": true,
+      "purpose": "Admin Post Management Page"
+    },
+    {
+      "path": "/admin/posts/edit/[id]",
+      "method": "GET",
+      "auth_required": true,
+      "purpose": "Admin Post Editor Page"
+    },
+    {
+      "path": "/health",
+      "method": "GET",
+      "auth_required": false,
+      "purpose": "Health check"
+    },
+    {
+      "path": "/predict",
+      "method": "POST",
+      "auth_required": false,
+      "purpose": "AI inference"
+    }
+  ],
+  "artifacts": {
+    "model": "model.pkl",
+    "preprocessor": "preprocessor.pkl"
+  }
+}
